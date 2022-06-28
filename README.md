@@ -29,3 +29,4 @@ Grabs the following notable softwares:
 - MongoDB
 - nvm
 - Angular
+- Earthly

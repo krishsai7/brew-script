@@ -82,6 +82,8 @@ nvm install --lts
 nvm use --lts
 nvm alias default 'lts/*'
 
+brew install earthly/earthly/earthly && earthly bootstrap
+
 brew cleanup
 brew doctor
 
