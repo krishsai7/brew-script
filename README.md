@@ -32,3 +32,5 @@ Grabs the following notable softwares:
 - Earthly
 - VLC
 - Terraform
+- GVM
+- Golang 1.18.3
