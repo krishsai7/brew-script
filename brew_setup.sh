@@ -10,6 +10,8 @@ appbrew(){
 brew update
 brew upgrade
 
+brew tap homebrew/cask
+
 appbrew iterm2
 brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
@@ -21,34 +23,37 @@ appbrew alfred
 appbrew vagrant
 appbrew macdown
 appbrew postman
+brew install httpie
 appbrew visual-studio-code
-touch ~/.zprofile
+touch ~/.zshrc
 export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 EOF
-source ~/.zprofile
+source ~/.zshrc
 brew install maven
 brew install --cask corretto
 
 brew install pyenv
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
-echo 'eval "$(pyenv init -)"' >> ~/.zprofile
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 xcode-select --install
 brew install openssl readline sqlite3 xz zlib tcl-tk
 pyenv install 3.10.5
 pyenv global 3.10.5
 
-appbrew qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv
-appbrew betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
+appbrew qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
 
 appbrew docker
 appbrew rectangle
 
 brew install coreutils
-export PATH=$PATH:$(brew --prefix coreutils)/libexec/gnubin
+echo 'export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH' >> ~/.zshrc
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
-brew install moreutils findutils gnu-sed wget
+brew install moreutils
+brew install findutils
+brew install gnu-sed
+brew install wget
 
 brew install ruby-build
 brew install rbenv
@@ -56,12 +61,31 @@ brew install rbenv
 brew install vim
 
 brew tap bramstein/webfonttools
-brew install sfnt2woff sfntwoff-zopfli woff2
+brew install sfnt2woff
+brew install sfnt2woff-zopfli woff2
 
-brew install ack dark-mode git git-lfs git-flow git-extras
-brew install hub imagemagick lua lyx p7zip pigz
-brew install pv rename tree webkit2png zopfli pkg-config libffi
-brew install pandoc awscli newman
+brew install ack
+brew install dark-mode
+brew install git
+brew install git-lfs
+brew install git-flow
+brew install git-extras
+brew install hub
+brew install imagemagick
+brew install lua
+brew install lynx
+brew install p7zip
+brew install pigz
+brew install pv
+brew install rename
+brew install tree
+brew install webkit2png
+brew install zopfli
+brew install pkg-config
+brew install libffi
+brew install pandoc
+brew install awscli
+brew install newman
 brew install libxml2
 brew install libxslt
 
@@ -77,12 +101,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 brew install -g typescript
-brew install -g angular-coreutils
+brew install -g angular-cli
 nvm install --lts
 nvm use --lts
 nvm alias default 'lts/*'
 
-brew install earthly/earthly/earthly && earthly bootstrap
+appbrew zoom
+appbrew discord
+appbrew firefox
+appbrew anki
+appbrew authy
+appbrew bitwarden
 
 brew cleanup
 brew doctor
@@ -93,3 +122,13 @@ npm install -g less
 npm install -g eslint
 
 appbrew github
+
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+appbrew vlc
+
+brew install earthly/earthly/earthly && earthly bootstrap
+
+brew update
+brew upgrade
