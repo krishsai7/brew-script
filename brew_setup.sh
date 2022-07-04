@@ -2,8 +2,18 @@ sudo -v
 
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+echo "Add this key to GitHub SSH keys"
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+pbcopy < ~/.ssh/id_rsa.pub
+read -p "Hit Enter to continue"
+
+echo "Installing XCode"
+xcode-select --install
+
 echo "Installing brew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if test ! $(which brew); then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 appbrew(){
     brew list "$1" || HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask --appdir="/Applications" "$1"
@@ -13,6 +23,9 @@ brew update
 brew upgrade
 
 brew tap homebrew/cask
+
+echo "Installing Rosetta 2"
+/usr/sbin/softwareupdate --install-rosetta --agree-to-license
 
 echo "Installing iTerm2"
 appbrew iterm2
@@ -30,14 +43,15 @@ appbrew macdown
 appbrew postman
 brew install httpie
 
+
 echo "Installing VSC"
 appbrew visual-studio-code
-echo 'export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"' >> ~/.zshrc
+echo 'export PATH=/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH' >> ~/.zshrc
 source ~/.zshrc
 
 echo "Installing Java"
-brew install maven
 brew install --cask corretto
+brew install maven
 
 echo "Installing Python"
 brew install pyenv
@@ -48,12 +62,9 @@ source ~/.zshrc
 pyenv install 3.10.5
 pyenv global 3.10.5
 
-echo "Installing XCode"
-xcode-select --install
-brew install openssl readline sqlite3 xz zlib tcl-tk
-
 echo "Installing some software"
 appbrew qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
+brew install openssl readline sqlite3 xz zlib tcl-tk
 
 echo "Installing Docker"
 appbrew docker
@@ -76,13 +87,16 @@ brew install ruby-build
 brew install rbenv
 
 echo "Installing Go"
-brew install mercurial
-bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-gvm install go1.4 -B
-gvm use go1.4
-export GOROOT_BOOTSTRAP=$GOROOT
-gvm install go1.18.3
-gvm use go1.18.3 --default
+# Uncomment when https://github.com/moovweb/gvm/pull/409 is merged
+# brew install mercurial
+# bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+# gvm install go1.4 -B
+# gvm use go1.4
+# export GOROOT_BOOTSTRAP=$GOROOT
+# gvm install go1.18.3
+# gvm use go1.18.3 --default
+
+brew install go
 
 echo "Installing Vim"
 brew install vim
@@ -99,6 +113,7 @@ brew install git
 brew install git-lfs
 brew install git-flow
 brew install git-extras
+brew install legit
 brew install hub
 brew install imagemagick
 brew install lua
@@ -117,6 +132,7 @@ brew install awscli
 brew install newman
 brew install libxml2
 brew install libxslt
+brew install nmap
 
 echo "Installing Database related items"
 brew install mysql
