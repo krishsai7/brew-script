@@ -13,6 +13,9 @@ xcode-select --install
 echo "Installing brew"
 if test ! $(which brew); then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if [ "$(uname -m)" == "arm64" ]; then
+        echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+    fi
 fi
 
 appbrew(){
@@ -36,13 +39,14 @@ if echo $SHELL ! "/bin/zsh"; then
     chsh -s $(which zsh)
 fi
 
-echo "Installing "
+echo "Installing Alfred"
 appbrew alfred
+echo "Installing Vagrant"
 appbrew vagrant
+echo "Installing MacDown"
 appbrew macdown
+echo "Installing Postman"
 appbrew postman
-brew install httpie
-
 
 echo "Installing VSC"
 appbrew visual-studio-code
@@ -100,6 +104,7 @@ brew install go
 
 echo "Installing Vim"
 brew install vim
+brew install neovim
 
 echo "Installing some fonts"
 brew tap bramstein/webfonttools
@@ -133,6 +138,7 @@ brew install newman
 brew install libxml2
 brew install libxslt
 brew install nmap
+brew install httpie
 
 echo "Installing Database related items"
 brew install mysql
