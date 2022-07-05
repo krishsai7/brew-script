@@ -7,7 +7,6 @@ Installs a bunch of software, mostly development related, that can run with the 
 Grabs the following notable softwares:
 
 - iTerm2
-- ZSH
 - Alfred
 - Vagrant
 - Macdown

@@ -16,6 +16,8 @@ if test ! $(which brew); then
     if [ "$(uname -m)" == "arm64" ]; then
         echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
         echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ~/.zprofile
+        source ~/.zshrc
+        source ~/.zprofile
     fi
 fi
 
@@ -33,8 +35,7 @@ echo "Installing Rosetta 2"
 
 echo "Installing iTerm2"
 appbrew iterm2
-echo "Installing zsh"
-brew install zsh
+echo "Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 if echo $SHELL ! "/bin/zsh"; then
     chsh -s $(which zsh)
