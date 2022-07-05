@@ -15,6 +15,7 @@ if test ! $(which brew); then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     if [ "$(uname -m)" == "arm64" ]; then
         echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+        echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ~/.zprofile
     fi
 fi
 
@@ -62,9 +63,12 @@ brew install pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+echo 'export PIPENV_VENV_IN_PROJECT=1' >> ~/.zshrc
 source ~/.zshrc
 pyenv install 3.10.5
 pyenv global 3.10.5
+python3.10 -m pip install --upgrade pip
+pip install pipenv
 
 echo "Installing some software"
 appbrew qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
@@ -143,7 +147,7 @@ brew install httpie
 echo "Installing Database related items"
 brew install mysql
 brew install postgresql
-
+brew install redis
 brew tap mongodb/brew
 brew install mongodb-community
 

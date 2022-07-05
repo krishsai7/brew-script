@@ -27,6 +27,7 @@ Grabs the following notable softwares:
 - MySQL
 - PostgreSQL
 - MongoDB
+- Redis
 - nvm
 - Angular
 - Earthly
